@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ソース ファイル">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="ヘッダー ファイル">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="ソース ファイル\ConnectingDB">
+      <UniqueIdentifier>{f8d3cd81-1f66-4f7e-bf9b-a49dd205dd8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\ConnectingDB">
+      <UniqueIdentifier>{e860e554-b2c1-48f3-835a-63f237727349}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\extractFeature">
+      <UniqueIdentifier>{c5835f31-28db-4d44-91c9-ecb3dc477794}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ConnectingDB\ConnectingDB.cpp">
+      <Filter>ソース ファイル\ConnectingDB</Filter>
+    </ClCompile>
+    <ClCompile Include="ConnectingDB\exifGps.cpp">
+      <Filter>ソース ファイル\ConnectingDB</Filter>
+    </ClCompile>
+    <ClCompile Include="ExtractFeatures.cpp">
+      <Filter>ソース ファイル\extractFeature</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ConnectingDB\exifGps.h">
+      <Filter>ヘッダー ファイル\ConnectingDB</Filter>
+    </ClInclude>
+    <ClInclude Include="ConnectingDB\ConnectingDB.h">
+      <Filter>ヘッダー ファイル\ConnectingDB</Filter>
+    </ClInclude>
+    <ClInclude Include="Gps.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Pattern.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="ExtractFeatures.hpp">
+      <Filter>ソース ファイル\extractFeature</Filter>
+    </ClInclude>
+    <ClInclude Include="CONSTANT.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
