@@ -14,7 +14,7 @@ public:
 	~ConnectingDB();
 	
 	/* Pattern内部の情報をデータベースに追加する */
-	int loadDB();
+	bool loadDB(double latitude, double longitude);
 
 		/* DataTableをcsvファイルに保存する */
 	void SaveToCSV(System::Data::DataTable^ dt, System::String^ fileName, bool hasHeader, 
@@ -22,23 +22,11 @@ public:
 
 private:
 	/* DBのtb_ロケーション情報を更新 */
-	void updateLocationTable(OleDbDataAdapter^ adapter, std::vector<Pattern>& patterns);
+	void createQueryString(System::String^& str, double latitude, double longitude);
 
 	/* DBのtb_特徴量を更新 */
-	void updateDescTable(OleDbDataAdapter^ adapter, std::vector<Pattern> patterns);
+	void loadFeatureIntoPattern(System::Data::DataTable^ table, std::vector<Pattern>& patterns);
 
-	/* DB更新時に発生するイベント */
-	static void OnRowUpdated(System::Object^ sender, OleDbRowUpdatedEventArgs^ e)
-	{
-		if (e->Status == System::Data::UpdateStatus::Continue && e->StatementType == System::Data::StatementType::Insert)
-	    {
-			OleDbCommand^ cmdNewID = gcnew OleDbCommand("SELECT @@IDENTITY", e->Command->Connection);
-			int s = (int)cmdNewID->ExecuteScalar();
-			e->Row["ID"] = (int)cmdNewID->ExecuteScalar();
-			e->Status = System::Data::UpdateStatus::SkipCurrentRow;
-	
-		}
-	};
 };
 
 

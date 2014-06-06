@@ -6,7 +6,7 @@ int main()
 {
 	ConnectingDB db;
 
-	db.loadDB();
+	db.loadDB(38.0, 141.0);
 
 	return 0;
 }
