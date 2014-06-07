@@ -6,8 +6,8 @@
 #include <opencv2/opencv.hpp>
 #include <opencv2/nonfree/features2d.hpp>
 
-#include "Pattern.h"
-#include "CONSTANT.h"
+#include "../Pattern.h"
+#include "../CONSTANT.h"
 
 /**
  * Store the kepoints and descriptors of image
@@ -30,7 +30,7 @@ public:
     * 画像を受け取り,特徴量を抽出する 
     * 抽出した特徴点,特徴量はPattern構造体として保存する
     */
-	bool getFeatures(std::vector<cv::Mat>& images, std::vector<Pattern>& patterns);
+	bool getFeatures(cv::Mat& image, Pattern& pattern);
 
 private:
 	/**
@@ -47,7 +47,6 @@ private:
 private:
 	cv::Ptr<cv::FeatureDetector>     m_detector;
     cv::Ptr<cv::DescriptorExtractor> m_extractor;
-    cv::Ptr<cv::DescriptorMatcher>   m_matcher;
 
 };
 

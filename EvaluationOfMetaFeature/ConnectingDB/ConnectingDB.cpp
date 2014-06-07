@@ -10,7 +10,7 @@ ConnectingDB::~ConnectingDB()
 }
 
 
-bool ConnectingDB::loadDB(double latitude, double longitude)
+bool ConnectingDB::loadDB(double latitude, double longitude, std::vector<Pattern>& patterns)
 {
 	//conect
 	System::String^ strConn = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\Users\\satoshi\\Documents\\Visual Studio 2012\\DB\\imageDatabase.accdb";
@@ -35,23 +35,15 @@ bool ConnectingDB::loadDB(double latitude, double longitude)
 		
 		//トランザクションをコミットします。
         transaction->Commit();
-
+		/*
 		System::String^ quote = "";
 		System::String^ separator = ",";
 		System::String^ replace = "";
 
 		System::String^ filename = "sample.csv";
 		SaveToCSV(table, filename, true,separator ,quote, replace);
-
-		std::vector<Pattern> patterns;
-
+		*/
 		loadFeatureIntoPattern(table, patterns);
-
-		for(int i = 0 ; i < patterns.size() ; i++)
-		{
-			std::cout << patterns[i].descriptors << std::endl;
-
-		}
 
 		return true;
 	}
@@ -108,6 +100,8 @@ void ConnectingDB::loadFeatureIntoPattern(System::Data::DataTable^ table, std::v
 
 	id= System::Convert::ToInt32( datarow["ID"]->ToString() );
 
+	std::cout << table->Rows->Count << std::endl;
+
 	//テーブルの行数まで繰り返す
 	for(int i = 0; i < table->Rows->Count; i++)
 	{
@@ -123,6 +117,7 @@ void ConnectingDB::loadFeatureIntoPattern(System::Data::DataTable^ table, std::v
 			//初期化
 			num = 0;
 			id= System::Convert::ToInt32( datarow["ID"]->ToString() );
+			std::cout << id << std::endl;
 			descriptors = cv::Mat::zeros(1, 64,  CV_8U);
 		}
 
@@ -134,6 +129,10 @@ void ConnectingDB::loadFeatureIntoPattern(System::Data::DataTable^ table, std::v
 			descriptors.at<unsigned char>(num - 1, j) = System::Convert::ToByte( datarow[descNum]->ToString() );
 		}
 	}
+	Pattern pattern;
+	pattern.descriptors = descriptors.clone();
+	patterns.push_back(pattern);
+
 }
 
 void ConnectingDB::SaveToCSV(System::Data::DataTable^ dt, System::String^ fileName, bool hasHeader, System::String^ separator, System::String^ quote, System::String^ replace)

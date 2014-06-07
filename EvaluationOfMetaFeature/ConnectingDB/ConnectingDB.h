@@ -14,7 +14,7 @@ public:
 	~ConnectingDB();
 	
 	/* Pattern内部の情報をデータベースに追加する */
-	bool loadDB(double latitude, double longitude);
+	bool loadDB(double latitude, double longitude, std::vector<Pattern>& patterns);
 
 		/* DataTableをcsvファイルに保存する */
 	void SaveToCSV(System::Data::DataTable^ dt, System::String^ fileName, bool hasHeader, 

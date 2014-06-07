@@ -1,4 +1,4 @@
-#include "ExtractFeatures.hpp"
+#include "ExtractFeatures.h"
 
 ExtractFeatures::ExtractFeatures(cv::Ptr<cv::FeatureDetector> detector, 
     cv::Ptr<cv::DescriptorExtractor> extractor
@@ -13,29 +13,23 @@ ExtractFeatures::~ExtractFeatures()
 {
 }
 
-bool ExtractFeatures::getFeatures(std::vector<cv::Mat>& images,
-									  std::vector<Pattern>& patterns)
+bool ExtractFeatures::getFeatures(cv::Mat& image,
+									  Pattern& pattern)
 {
 	bool extractFlag = false;
 
-	//フォルダにある画像の枚数分読み込み
-	for(int i = 0; i < images.size(); i++)
-	{	
-		//グレイスケール化
-		cv::Mat grayImg;										
-		getGray(images[i], grayImg);
+	//グレイスケール化
+	cv::Mat grayImg;										
+	getGray(image, grayImg);
 
-		//特徴量の抽出
-		Pattern _pattern;
-		extractFlag = extractFeatures(grayImg, _pattern.keypoints, _pattern.descriptors);
-		if(extractFlag == false)
-			return false;
+	//特徴量の抽出
+	extractFlag = extractFeatures(grayImg, pattern.keypoints, pattern.descriptors);
+	if(extractFlag == false)
+		return extractFlag;
 
-		_pattern.image = images[i];
+	pattern.image = image.clone();
 
-		patterns.push_back( _pattern );
-	}
-	return true;
+	return extractFlag;
 }
 
 void ExtractFeatures::getGray(const cv::Mat& image, cv::Mat& gray)

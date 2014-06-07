@@ -84,16 +84,20 @@
   <ItemGroup>
     <ClCompile Include="ConnectingDB\ConnectingDB.cpp" />
     <ClCompile Include="ConnectingDB\exifGps.cpp" />
-    <ClCompile Include="ExtractFeatures.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PatternDetector.cpp" />
+    <ClCompile Include="PatternDetector\ExtractFeatures.cpp" />
+    <ClCompile Include="PatternDetector\Maching.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConnectingDB\ConnectingDB.h" />
     <ClInclude Include="ConnectingDB\exifGps.h" />
     <ClInclude Include="CONSTANT.h" />
-    <ClInclude Include="ExtractFeatures.hpp" />
     <ClInclude Include="Gps.h" />
     <ClInclude Include="Pattern.h" />
+    <ClInclude Include="PatternDetector\ExtractFeatures.h" />
+    <ClInclude Include="PatternDetector\Matching.h" />
+    <ClInclude Include="PatternDetector\PatternDetector.h" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

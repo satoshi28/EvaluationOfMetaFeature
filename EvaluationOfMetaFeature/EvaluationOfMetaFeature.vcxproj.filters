@@ -19,7 +19,7 @@
     <Filter Include="ヘッダー ファイル\ConnectingDB">
       <UniqueIdentifier>{e860e554-b2c1-48f3-835a-63f237727349}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\extractFeature">
+    <Filter Include="ソース ファイル\PatternDetector">
       <UniqueIdentifier>{c5835f31-28db-4d44-91c9-ecb3dc477794}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -30,11 +30,17 @@
     <ClCompile Include="ConnectingDB\exifGps.cpp">
       <Filter>ソース ファイル\ConnectingDB</Filter>
     </ClCompile>
-    <ClCompile Include="ExtractFeatures.cpp">
-      <Filter>ソース ファイル\extractFeature</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="PatternDetector\ExtractFeatures.cpp">
+      <Filter>ソース ファイル\PatternDetector</Filter>
+    </ClCompile>
+    <ClCompile Include="PatternDetector\Maching.cpp">
+      <Filter>ソース ファイル\PatternDetector</Filter>
+    </ClCompile>
+    <ClCompile Include="PatternDetector.cpp">
+      <Filter>ソース ファイル\PatternDetector</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -50,11 +56,17 @@
     <ClInclude Include="Pattern.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="ExtractFeatures.hpp">
-      <Filter>ソース ファイル\extractFeature</Filter>
-    </ClInclude>
     <ClInclude Include="CONSTANT.h">
       <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="PatternDetector\PatternDetector.h">
+      <Filter>ソース ファイル\PatternDetector</Filter>
+    </ClInclude>
+    <ClInclude Include="PatternDetector\Matching.h">
+      <Filter>ソース ファイル\PatternDetector</Filter>
+    </ClInclude>
+    <ClInclude Include="PatternDetector\ExtractFeatures.h">
+      <Filter>ソース ファイル\PatternDetector</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
