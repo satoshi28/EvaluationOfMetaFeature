@@ -94,6 +94,7 @@
     <ClInclude Include="ConnectingDB\exifGps.h" />
     <ClInclude Include="CONSTANT.h" />
     <ClInclude Include="Gps.h" />
+    <ClInclude Include="PathDetector.h" />
     <ClInclude Include="Pattern.h" />
     <ClInclude Include="PatternDetector\ExtractFeatures.h" />
     <ClInclude Include="PatternDetector\Matching.h" />

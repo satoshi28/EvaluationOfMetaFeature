@@ -34,7 +34,7 @@ int Matching::getMatches(const Pattern queryPattern)
 			matchedNumber = i;
 		}
 	}
-	std::cout << max << std::endl;
+	//std::cout << max << std::endl;
 	return matchedNumber;
 
 }

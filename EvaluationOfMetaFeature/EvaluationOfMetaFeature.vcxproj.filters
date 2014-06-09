@@ -68,5 +68,8 @@
     <ClInclude Include="PatternDetector\ExtractFeatures.h">
       <Filter>ソース ファイル\PatternDetector</Filter>
     </ClInclude>
+    <ClInclude Include="PathDetector.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
