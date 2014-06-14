@@ -1,72 +1,73 @@
 #include "Matching.h"
 
-Matching::Matching(cv::Ptr<cv::DescriptorMatcher> matcher)
-	: m_matcher(matcher)
+Matching::Matching()
 {
 }
 
 
-int Matching::getMatches(const Pattern queryPattern)
+void Matching::getMatches(const Pattern queryPattern, std::vector<int>& matchingList)
 {
-	
-	//マッチングしたペア
-	std::vector<cv::DMatch> matches;
-	// Get matches
-	match( queryPattern.keypoints , queryPattern.descriptors, matches);
+	std::vector< std::pair<int, int> > imageRankingList(dataSetSize);	//各画像のランキング(rank, index)
 
-	std::vector<int> rankingList(dataSetSize);
-	//全要素の初期化
-	std::fill(rankingList.begin(), rankingList.end(), 0);
-	int num;
-	for(int i = 0; i < matches.size(); i++)
+	for(int i = 0; i < dataSetSize; i++)
 	{
-		num = matches[i].imgIdx;
-		rankingList[num] += 1;
+		//マッチングしたペア
+		std::vector<cv::DMatch> matches;
+		// Get matches
+		match( queryPattern.keypoints , queryPattern.descriptors,m_matchers[i], matches);
+		
+		//評価
+		imageRankingList[i].first = matches.size();
+		imageRankingList[i].second = i;
 	}
 
-	int matchedNumber;
-	int max = 0;
-	for(int i = 0 ; i < rankingList.size();i++)
+	//画像のランキングに基づいて降順に並び替え
+	std::sort(imageRankingList.begin(), imageRankingList.end(),std::greater<std::pair<int, int>>() );
+
+	//3位まで返す
+	for(int i = 0; i < 3; i++)
 	{
-		if(max < rankingList[i])
-		{
-			max = rankingList[i];
-			matchedNumber = i;
-		}
+		matchingList.push_back(imageRankingList[i].second);
 	}
-	//std::cout << max << std::endl;
-	return matchedNumber;
 
 }
 
 
 void Matching::train(const std::vector<Pattern> trainPatterns )
 {
-	
-	// API of cv::DescriptorMatcher is somewhat tricky
-	// First we clear old train data:
-	m_matcher->clear();
 
 	dataSetSize = trainPatterns.size();
-	std::vector<cv::Mat> descriptors( dataSetSize );
+
+	for(int i= 0; i < trainPatterns.size(); i++)
+	{
+		cv::Ptr<cv::DescriptorMatcher>   matcher   = cv::DescriptorMatcher::create(matcherName);
+		m_matchers.push_back(matcher);
+
+		// API of cv::DescriptorMatcher is somewhat tricky
+		// First we clear old train data:
+		m_matchers[i]->clear();
+	}
+
+	std::vector<cv::Mat> descriptors(1);
 
 	for(int i = 0; i < trainPatterns.size(); i++)
 	{
 		// Then we add vector of descriptors (each descriptors matrix describe one image). 
 		// This allows us to perform search across multiple images:
+		descriptors[0] = trainPatterns[i].descriptors.clone();
+		m_matchers[i]->add(descriptors);
 
-		descriptors[i]= trainPatterns[i].descriptors.clone();
+		// After adding train data perform actual train:
+		m_matchers[i]->train();
 	}
 
-	m_matcher->add(descriptors);
-	// After adding train data perform actual train:
-	m_matcher->train();
+	
 	
 }
 
 
 
-void Matching::match(std::vector<cv::KeyPoint> queryKeypoints,cv::Mat queryDescriptors,
+void Matching::match(std::vector<cv::KeyPoint> queryKeypoints,cv::Mat queryDescriptors, cv::Ptr<cv::DescriptorMatcher>& m_matcher,
 				std::vector<cv::DMatch>& matches)
 {
 	const float minRatio = 0.8f;

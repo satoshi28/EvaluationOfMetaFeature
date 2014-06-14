@@ -11,7 +11,7 @@ public:
 	~PatternDetector();
 
 	/* •¨‘ÌŒŸo */
-	int findPattern(cv::Mat queryImage );
+	void findPattern(cv::Mat queryImage, std::vector<int>& ranking );
 
 private:
 	Matching m_matching;
