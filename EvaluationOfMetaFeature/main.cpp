@@ -11,7 +11,7 @@ bool readImages(std::vector<std::string> filenames, std::vector<cv::Mat>& images
 
 int main()
 {
-	System::String^ IMAGE_DIR = "C:\\Users\\satoshi\\Documents\\Image\\qmoutuji\\";	// 画像が保存されているフォルダ
+	System::String^ IMAGE_DIR = "C:\\Users\\satoshi\\Documents\\Image\\qimage\\";	// 画像が保存されているフォルダ
 
 	ConnectingDB db;
 	PathDetector path;
@@ -38,7 +38,7 @@ int main()
 	{
 		int matchedNumber = patternDetector.findPattern(queryImages[i]);
 
-		txtFile << i+1 << "	" << matchedNumber+1 << std::endl;
+		txtFile << i+1 << "	" << matchedNumber+2 << std::endl;
 	}
 
 	std::cout << "stop" << std::endl;

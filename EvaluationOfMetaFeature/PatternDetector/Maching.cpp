@@ -86,7 +86,7 @@ void Matching::match(std::vector<cv::KeyPoint> queryKeypoints,cv::Mat queryDescr
 	//ratio test
 	for(int j = 0; j < knnMatches.size(); j++)
 	{
-		if(knnMatches[j].empty() == false)
+		if(knnMatches[j].empty() == false && knnMatches[j][0].distance < 150)
 		{
 			const cv::DMatch& bestMatch = knnMatches[j][0];
 			const cv::DMatch& betterMatch = knnMatches[j][1];
