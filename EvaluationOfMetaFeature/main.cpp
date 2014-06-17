@@ -17,7 +17,7 @@ int main()
 	ConnectingDB db;
 	PathDetector path;
 
-	std::ofstream txtFile("matchingReslutZuBuD_ratio_budget=400.txt");
+	std::ofstream txtFile("matchingReslut.txt");
 
 	std::vector<Pattern> patterns;
 
@@ -47,7 +47,6 @@ int main()
 		std::vector<int> ranking;
 
 		patternDetector.findPattern(queryImages[i], ranking);
-		txtFile << i+1 << "	" << ranking[0] << std::endl;
 		
 		cv::Mat matchingResult;
 		std::vector<std::string> matchingList;
@@ -56,6 +55,9 @@ int main()
 		for(int i = 0; i < 3; i++)
 			matchingList.push_back(databaseFilelist[ranking[i]]);
 		
+		//結果をテキストファイルに出力
+		txtFile << i+1 << "	" << matchingList[1] << std::endl;
+		//結果を画像で出力
 		getResult(matchingList, matchingResult);
 		
 		static int count = 0;

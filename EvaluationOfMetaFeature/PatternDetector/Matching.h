@@ -19,7 +19,8 @@ public:
 	/**
      *
      */
-    Matching();
+    Matching(cv::Ptr<cv::DescriptorMatcher>   matcher   = cv::DescriptorMatcher::create(matcherName));
+
 
     /**
     * 
@@ -40,7 +41,7 @@ private:
     
 	//‰æ‘œƒZƒbƒg‚Ì”
 	int dataSetSize;
-    std::vector< cv::Ptr<cv::DescriptorMatcher> > m_matchers;
+    cv::Ptr<cv::DescriptorMatcher> m_matcher;
 
 };
 
