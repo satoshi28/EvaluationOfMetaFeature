@@ -27,6 +27,7 @@ private:
 	/* DB‚Ìtb_“Á’¥—Ê‚ğXV */
 	void loadFeatureIntoPattern(System::Data::DataTable^ table, std::vector<Pattern>& patterns);
 
+	void loadKeypointsIntoPattern(System::Data::DataTable^ table, std::vector<Pattern>& patterns);
 };
 
 
