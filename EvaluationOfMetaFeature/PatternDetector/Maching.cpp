@@ -71,7 +71,7 @@ void Matching::train(const std::vector<Pattern> trainPatterns )
 void Matching::match(std::vector<cv::KeyPoint> queryKeypoints,cv::Mat queryDescriptors, cv::Ptr<cv::DescriptorMatcher>& m_matcher,
 				std::vector<cv::DMatch>& matches)
 {
-	const float minRatio = 0.8f;
+	const float minRatio = 0.6f;
 	matches.clear();
 
 	//ç≈ãﬂñTì_ÇÃíTçı
@@ -88,7 +88,7 @@ void Matching::match(std::vector<cv::KeyPoint> queryKeypoints,cv::Mat queryDescr
 	//ratio test
 	for(int j = 0; j < knnMatches.size(); j++)
 	{
-		if(knnMatches[j].empty() == false && ( knnMatches[j][0].distance < 100) )
+		if(knnMatches[j].empty() == false )
 		{
 			const cv::DMatch& bestMatch = knnMatches[j][0];
 			const cv::DMatch& betterMatch = knnMatches[j][1];
