@@ -12,7 +12,7 @@ int getResult(std::vector<std::string> filelist, cv::Mat& resultImage);
 
 int main()
 {
-	System::String^ IMAGE_DIR = "C:\\Users\\satoshi\\Documents\\Image\\qimage\\";	// 画像が保存されているフォルダ
+	System::String^ IMAGE_DIR = "C:\\Users\\satoshi\\Documents\\Image\\query\\";	// 画像が保存されているフォルダ
 	System::String^ DATABASE_IMG_DIR = "C:\\Users\\satoshi\\Documents\\Image\\databaseImage\\";	// 画像が保存されているフォルダ
 	ConnectingDB db;
 	PathDetector path;
@@ -56,7 +56,7 @@ int main()
 			matchingList.push_back(databaseFilelist[ranking[i]]);
 		
 		//結果をテキストファイルに出力
-		txtFile << i+1 << "	" << matchingList[1] << std::endl;
+		txtFile << matchingList[0] << "	" << matchingList[1] << std::endl;
 		//結果を画像で出力
 		getResult(matchingList, matchingResult);
 		

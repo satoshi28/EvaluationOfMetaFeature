@@ -19,7 +19,7 @@ public:
 	/**
      *
      */
-    Matching(cv::Ptr<cv::DescriptorMatcher>   matcher   = cv::DescriptorMatcher::create(matcherName));
+    Matching();
 
 
     /**
@@ -32,7 +32,7 @@ private:
 	//テンプレート画像からPatternを作成
 	
 
-	void match(std::vector<cv::KeyPoint> queryKeypoints,cv::Mat queryDescriptors,cv::Ptr<cv::DescriptorMatcher>& matcher,
+	void match(std::vector<cv::KeyPoint> queryKeypoints,cv::Mat queryDescriptors,std::vector<cv::KeyPoint> trainKeypoints,cv::Ptr<cv::DescriptorMatcher>& matcher,
 				std::vector<cv::DMatch>& matches);
 
 	//幾何学的整合性チェック
@@ -41,7 +41,7 @@ private:
     
 	//画像セットの数
 	int dataSetSize;
-    cv::Ptr<cv::DescriptorMatcher> m_matcher;
+    std::vector< cv::Ptr<cv::DescriptorMatcher>> m_matchers;
 	std::vector<Pattern> m_trainPatterns;
 };
 
