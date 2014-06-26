@@ -7,7 +7,7 @@
 class PatternDetector
 {
 public:
-	PatternDetector(std::vector<Pattern> trainPatterns);
+	PatternDetector(std::vector<Pattern>& trainPatterns);
 	~PatternDetector();
 
 	/* •¨‘ÌŒŸo */

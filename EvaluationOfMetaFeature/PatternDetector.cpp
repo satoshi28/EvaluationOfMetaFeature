@@ -1,7 +1,7 @@
 #include "PatternDetector\PatternDetector.h"
 
 
-PatternDetector::PatternDetector(std::vector<Pattern> trainPatterns)
+PatternDetector::PatternDetector(std::vector<Pattern>& trainPatterns)
 {
 	//訓練データを格納(このデータに対しマッチングされる)
 	m_matching.train(trainPatterns);
