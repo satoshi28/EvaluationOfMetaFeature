@@ -13,8 +13,9 @@ void Matching::getMatches(const Pattern queryPattern, std::vector<int>& matching
 	// Get matches
 
 	for(int i = 0; i < dataSetSize; i++)
-		match( queryPattern.keypoints , queryPattern.descriptors, m_trainPatterns[i].keypoints   ,m_matchers[i], matches[i]);
-
+	{
+		match( queryPattern.descriptors , m_trainPatterns[i].descriptors, matches[i]);
+	}
 	std::vector< std::pair<int, int> > imageRankingList(dataSetSize);	//各画像のランキング(rank, index)
 
 	//評価
@@ -42,44 +43,32 @@ void Matching::train(const std::vector<Pattern> trainPatterns )
 	
 
 	dataSetSize = trainPatterns.size();
-	std::vector<cv::Mat> descriptors( 1 );
 
 	m_trainPatterns = trainPatterns;
-
-	for(int i = 0; i < trainPatterns.size(); i++)
-	{
-		cv::Ptr<cv::DescriptorMatcher>   matcher   = cv::DescriptorMatcher::create(matcherName);
-
-		// First we clear old train data:
-		matcher->clear();
-		// Then we add vector of descriptors (each descriptors matrix describe one image). 
-		// This allows us to perform search across multiple images:
-
-		descriptors[0]= trainPatterns[i].descriptors.clone();
-		matcher->add(descriptors);
-		matcher->train();
-
-		m_matchers.push_back(matcher);
-	}
 
 	
 }
 
 
 
-void Matching::match(std::vector<cv::KeyPoint> queryKeypoints,cv::Mat queryDescriptors,std::vector<cv::KeyPoint> trainKeypoints, cv::Ptr<cv::DescriptorMatcher>& m_matcher,
-				std::vector<cv::DMatch>& matches)
+void Matching::match(cv::Mat queryDescriptors,cv::Mat dbDescriptors, std::vector<cv::DMatch>& matches)
 {
-	const float minRatio = 0.6f;
+	const float minRatio = 0.8f;
 	matches.clear();
 
 	//最近傍点の探索
+	cv::Ptr<cv::DescriptorMatcher>   matcher   = cv::DescriptorMatcher::create(matcherName);
+	matcher->clear();
+	std::vector<cv::Mat> descriptors(1);
+	descriptors[0] = queryDescriptors.clone();
+	matcher->add(descriptors);
+	matcher->train();
 
 	//knnマッチング
 	std::vector< std::vector<cv::DMatch>>  knnMatches;
 
 	// queryとmatcherに保存されている特徴量をknn構造体を用いて最近傍点を検索する.
-	m_matcher->knnMatch(queryDescriptors, knnMatches, 2);
+	matcher->knnMatch(dbDescriptors, knnMatches, 2);
 
 	//
 	std::vector<cv::DMatch> correctMatches;
