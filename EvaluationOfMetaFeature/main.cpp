@@ -12,8 +12,8 @@ int getResult(std::vector<std::string> filelist, cv::Mat& resultImage);
 
 int main()
 {
-	System::String^ IMAGE_DIR = "C:\\Users\\satoshi\\Documents\\Image\\query\\";	// 画像が保存されているフォルダ
-	System::String^ DATABASE_IMG_DIR = "C:\\Users\\satoshi\\Documents\\Image\\databaseImage\\";	// 画像が保存されているフォルダ
+	System::String^ IMAGE_DIR = "C:\\Users\\satoshi\\Documents\\Image\\ZuBuD\\query\\";	// 画像が保存されているフォルダ
+	System::String^ DATABASE_IMG_DIR = "C:\\Users\\satoshi\\Documents\\Image\\ZuBuD\\databaseImage";	// 画像が保存されているフォルダ
 	ConnectingDB db;
 	PathDetector path;
 
