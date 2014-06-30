@@ -32,7 +32,8 @@ private:
 	//テンプレート画像からPatternを作成
 	
 
-	void match(cv::Mat queryDescriptors,cv::Mat dbDescriptors, std::vector<cv::DMatch>& matches);
+	void match(std::vector<cv::KeyPoint> queryKeypoints,cv::Mat queryDescriptors,std::vector<cv::KeyPoint> trainKeypoints,cv::Ptr<cv::DescriptorMatcher>& matcher,
+				std::vector<cv::DMatch>& matches);
 
 	//幾何学的整合性チェック
 	bool geometricConsistencyCheck(std::vector<cv::KeyPoint> queryKeypoints, std::vector<cv::KeyPoint> trainKeypoints, std::vector<cv::DMatch>& match);

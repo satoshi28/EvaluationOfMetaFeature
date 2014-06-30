@@ -59,9 +59,7 @@ void Matching::match(cv::Mat queryDescriptors,cv::Mat dbDescriptors, std::vector
 	//最近傍点の探索
 	cv::Ptr<cv::DescriptorMatcher>   matcher   = cv::DescriptorMatcher::create(matcherName);
 	matcher->clear();
-	std::vector<cv::Mat> descriptors(1);
-	descriptors[0] = queryDescriptors.clone();
-	matcher->add(descriptors);
+	matcher->add(queryDescriptors);
 	matcher->train();
 
 	//knnマッチング
