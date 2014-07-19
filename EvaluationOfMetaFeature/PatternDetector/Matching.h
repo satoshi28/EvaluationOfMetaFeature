@@ -25,7 +25,7 @@ public:
     /**
     * 
     */
-	void getMatches(const Pattern queryPattern, std::vector<int>& matchingList);
+	void getMatches(Pattern& queryPattern, std::vector<int>& matchingList);
 
 	void train(const std::vector<Pattern> trainPatterns );
 private:	

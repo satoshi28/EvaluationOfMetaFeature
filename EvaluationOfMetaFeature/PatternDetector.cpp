@@ -14,7 +14,7 @@ PatternDetector
 {
 }
 
-void PatternDetector::findPattern(cv::Mat queryImage, std::vector<int>& ranking )
+void PatternDetector::findPattern(cv::Mat& queryImage, std::vector<int>& ranking )
 {
 	
 	ExtractFeatures extract;
@@ -28,4 +28,5 @@ void PatternDetector::findPattern(cv::Mat queryImage, std::vector<int>& ranking 
 	// すべての画像同士をマッチングする
 	m_matching.getMatches(queryPattern,ranking);
 	
+	queryImage = queryPattern.image;
 }

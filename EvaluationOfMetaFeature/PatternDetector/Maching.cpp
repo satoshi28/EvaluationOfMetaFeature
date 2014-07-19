@@ -6,7 +6,7 @@ Matching::Matching(cv::Ptr<cv::DescriptorMatcher> matcher)
 }
 
 
-void Matching::getMatches(const Pattern queryPattern, std::vector<int>& matchingList)
+void Matching::getMatches(Pattern& queryPattern, std::vector<int>& matchingList)
 {
 
 	//マッチングしたペア
@@ -38,6 +38,18 @@ void Matching::getMatches(const Pattern queryPattern, std::vector<int>& matching
 	for(int i = 0; i < 3; i++)
 	{
 		matchingList.push_back(imageRankingList[i].second);
+	}
+
+	//入力画像にマッチング点を描画
+	for(int i =0; i < matches.size(); i++)
+	{
+		if(matches[i].imgIdx == matchingList[0])
+		{
+			cv::Point2d point =queryPattern.keypoints[matches[i].queryIdx].pt;
+			cv::circle(queryPattern.image, cv::Point(point.x,point.y),
+				2, cv::Scalar(20,165,255),-1,CV_AA);
+			
+		}
 	}
 
 }
