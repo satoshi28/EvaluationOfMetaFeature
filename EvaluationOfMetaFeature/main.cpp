@@ -57,6 +57,7 @@ int main()
 		
 		//結果をテキストファイルに出力
 		txtFile << matchingList[0] << "	" << matchingList[1] << std::endl;
+		/*
 		//結果を画像で出力
 		getResult(matchingList, matchingResult);
 		
@@ -68,6 +69,7 @@ int main()
 		result += ".jpg";
 		cv::imwrite(result,matchingResult);
 		count++;
+		*/
 		
 	}
 
