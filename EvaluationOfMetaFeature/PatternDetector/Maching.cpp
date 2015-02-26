@@ -63,6 +63,14 @@ void Matching::train(const std::vector<Pattern> trainPatterns )
 	m_matcher->add(descriptors);
 	// After adding train data perform actual train:
 	m_matcher->train();
+
+	/*
+	cv::Ptr<cv::flann::IndexParams>  index_params = new cv::flann::LshIndexParams(6,12,1);
+	cv::Ptr<cv::flann::SearchParams> search_params = new cv::flann::SearchParams(50);
+	LSHmatcher = cv::FlannBasedMatcher(index_params, search_params);
+	LSHmatcher.add(descriptors);
+	LSHmatcher.train();
+	*/
 	
 }
 
@@ -81,7 +89,7 @@ void Matching::match(std::vector<cv::KeyPoint> queryKeypoints,cv::Mat queryDescr
 
 	// queryとmatcherに保存されている特徴量をknn構造体を用いて最近傍点を検索する.
 	m_matcher->knnMatch(queryDescriptors, knnMatches, 2);
-
+	//LSHmatcher.knnMatch(queryDescriptors, knnMatches, 2);
 	//
 	std::vector<cv::DMatch> correctMatches;
 

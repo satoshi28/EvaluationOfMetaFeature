@@ -42,6 +42,8 @@ int main()
 
 	std::cout << "start" << std::endl;
 
+	int64 start = cv::getTickCount();
+
 	for(int i = 0; i < queryImages.size(); i++)
 	{
 		std::vector<int> ranking;
@@ -73,6 +75,12 @@ int main()
 		
 	}
 
+	
+	int64 end = cv::getTickCount();
+	float time = (end - start) * 1000 / cv::getTickFrequency();
+
+	time /= queryImages.size();
+	std::cout << "average_time:"<< time << std::endl;
 	std::cout << "stop" << std::endl;
 	//cv::imshow("matchingResult", patterns[matchedNumber].image);
 

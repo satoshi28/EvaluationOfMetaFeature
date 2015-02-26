@@ -43,6 +43,7 @@ private:
 	int dataSetSize;
     cv::Ptr<cv::DescriptorMatcher> m_matcher;
 	std::vector<Pattern> m_trainPatterns;
+	cv::FlannBasedMatcher LSHmatcher;
 };
 
 
