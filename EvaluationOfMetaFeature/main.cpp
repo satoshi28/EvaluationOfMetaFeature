@@ -5,30 +5,45 @@
 #include "PatternDetector\PatternDetector.h"
 #include "PathDetector.h"
 
-
-
 bool readImages(std::vector<std::string> filenames, std::vector<cv::Mat>& images);
 
-int main()
+int main(int argc, char* argv[])
 {
-	System::String^ IMAGE_DIR = "C:\\Users\\satoshi\\Documents\\Image\\qimage\\";	// 画像が保存されているフォルダ
+	if(argc < 1)
+	{
+		std::cout << "please input argumet" << std::cout;
+		return 1;
+	}
+	//DBの名前を取得
+	std::string fileName = argv[1];
 
+
+	System::String^ IMAGE_DIR = "C:\\Users\\satoshi\\Documents\\Image\\hiraizumi_kousen\\query";		// クエリ画像が保存されているフォルダ
+	System::String^ DATABASE_IMG_DIR = "C:\\Users\\satoshi\\Documents\\Image\\hiraizumi_kousen\\query";	// DB用画像が保存されているフォルダ
 	ConnectingDB db;
 	PathDetector path;
 
-	std::ofstream txtFile("matchingReslut.txt");
-
-	std::vector<Pattern> patterns;
+	//結果出力ファイルの用意
+	std::string txtName = "matchingResult_hiraizumi_kousen_";
+	txtName += fileName;
+	txtName += ".txt";
+	std::ofstream txtFile(txtName);
 
 	// フォルダの画像名を走査
 	std::vector<std::string> backfilelist;	//画像の絶対パス
 	std::vector<cv::Mat> queryImages;
 
+	//クエリ画像の読み込み
 	path.getPath(IMAGE_DIR, backfilelist);
-
 	readImages(backfilelist, queryImages);
 
-	db.loadDB(-1, -1, patterns);
+	//データベース構築に使った画像のパスを取得
+	std::vector<std::string> databaseFilelist;	//画像の絶対パス
+	path.getPath(DATABASE_IMG_DIR, databaseFilelist);
+
+	//データベースから特徴量の読み込み
+	std::vector<Pattern> patterns;
+	db.loadDB(patterns, fileName);
 	
 	PatternDetector patternDetector(patterns);
 
@@ -36,15 +51,19 @@ int main()
 
 	for(int i = 0; i < queryImages.size(); i++)
 	{
-		int matchedNumber = patternDetector.findPattern(queryImages[i]);
-
-		txtFile << i+1 << "	" << matchedNumber+2 << std::endl;
+		std::vector<int> ranking;
+		patternDetector.findPattern(queryImages[i], ranking);
+		
+		std::vector<std::string> matchingList;
+		matchingList.push_back(backfilelist[i]);
+		matchingList.push_back(databaseFilelist[ranking[0]]);
+		
+		//結果をテキストファイルに出力
+		txtFile << matchingList[0] << "	" << matchingList[1] << std::endl;
 	}
 
-	std::cout << "stop" << std::endl;
-	//cv::imshow("matchingResult", patterns[matchedNumber].image);
+	std::cout << "exit" << std::endl;
 
-	cv::waitKey(0);
 	return 0;
 }
 
@@ -54,11 +73,8 @@ bool readImages(std::vector<std::string> filenames, std::vector<cv::Mat>& images
 	{
 
 		cv::Mat image;
-		std::string a = filenames[i];
-		
-		std::cout << a << std::endl;
 
-		image = cv::imread(a,1);			//画像の読み込み
+		image = cv::imread(filenames[i],1);			//画像の読み込み
 		if (image.empty())
 		{
 			std::cout << "Input image cannot be read" << std::endl;

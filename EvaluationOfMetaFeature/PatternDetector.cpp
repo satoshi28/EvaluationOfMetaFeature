@@ -1,31 +1,26 @@
 #include "PatternDetector\PatternDetector.h"
 
 
-PatternDetector::PatternDetector(std::vector<Pattern> trainPatterns)
+PatternDetector::PatternDetector(std::vector<Pattern>& trainPatterns)
 {
-	//訓練データを格納(このデータに対しマッチングされる)
+	// 訓練データを格納(このデータに対しマッチングされる)
 	m_matching.train(trainPatterns);
 }
 
-PatternDetector
-::~PatternDetector
-()
-{
-}
+PatternDetector::~PatternDetector(){}
 
-int PatternDetector::findPattern(cv::Mat queryImage )
+void PatternDetector::findPattern(cv::Mat queryImage, std::vector<int>& ranking )
 {
 	
 	ExtractFeatures extract;
-	int matchedNumber = 0;
-	Pattern queryPattern;
+	int matchedNumber = 0;		// マッチング結果
+	Pattern queryPattern;		// クエリ画像のパターン構造体
+
 	//処理用
 	// 特徴量をPatternに保存
 	extract.getFeatures(queryImage,queryPattern);
 
 	// すべての画像同士をマッチングする
-	matchedNumber = m_matching.getMatches(queryPattern);
-
-	return matchedNumber;
+	m_matching.getMatches(queryPattern,ranking);
 	
 }

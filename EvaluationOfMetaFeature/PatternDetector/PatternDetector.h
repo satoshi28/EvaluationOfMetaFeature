@@ -7,15 +7,14 @@
 class PatternDetector
 {
 public:
-	PatternDetector(std::vector<Pattern> trainPatterns);
+	PatternDetector(std::vector<Pattern>& trainPatterns);
 	~PatternDetector();
 
 	/* •¨‘ÌŒŸo */
-	int findPattern(cv::Mat queryImage );
+	void findPattern(cv::Mat queryImage, std::vector<int>& ranking );
 
 private:
 	Matching m_matching;
-
 };
 
 
