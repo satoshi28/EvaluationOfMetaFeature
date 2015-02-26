@@ -24,8 +24,6 @@ public:
 	*/
 	int getPath(String^ folder, std::vector<std::string>&  paths)
 	{
-
-
 		/* step1: 指定フォルダ下の画像pathをfileに保存 */
 		array<String^>^ file = Directory::GetFiles( folder );
 	
@@ -37,8 +35,6 @@ public:
 
 			path.clear();
 		}
-
-		
 		return 0;
 	}
 

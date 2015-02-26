@@ -83,7 +83,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ConnectingDB\ConnectingDB.cpp" />
-    <ClCompile Include="ConnectingDB\exifGps.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PatternDetector.cpp" />
     <ClCompile Include="PatternDetector\ExtractFeatures.cpp" />
@@ -91,9 +90,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConnectingDB\ConnectingDB.h" />
-    <ClInclude Include="ConnectingDB\exifGps.h" />
     <ClInclude Include="CONSTANT.h" />
-    <ClInclude Include="Gps.h" />
     <ClInclude Include="PathDetector.h" />
     <ClInclude Include="Pattern.h" />
     <ClInclude Include="PatternDetector\ExtractFeatures.h" />

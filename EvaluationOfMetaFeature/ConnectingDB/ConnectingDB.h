@@ -13,14 +13,19 @@ public:
 	ConnectingDB();
 	~ConnectingDB();
 	
-	/* Pattern内部の情報をデータベースに追加する */
-	bool loadDB(std::vector<Pattern>& patterns, std::string fileName);
+	/**
+	* @brief 特徴量DBからpatternを構築する
+	* @param[in] databaseName データベースの名前
+	* @param[out] patterns
+	*/
+	bool loadDB(std::string databaseName, std::vector<Pattern>& patterns);
 
 private:
-	/* DBのtb_ロケーション情報を更新 */
-	void createQueryString(System::String^& str, double latitude, double longitude);
-
-	/* DBのtb_特徴量を更新 */
+	/**
+	* @brief 特徴量テーブルからpatternを構築する
+	* @param[in] データベースの名前
+	* @param[out] patterns
+	*/
 	void loadFeatureIntoPattern(System::Data::DataTable^ table, std::vector<Pattern>& patterns);
 };
 

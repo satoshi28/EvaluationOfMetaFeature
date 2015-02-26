@@ -27,9 +27,6 @@
     <ClCompile Include="ConnectingDB\ConnectingDB.cpp">
       <Filter>ソース ファイル\ConnectingDB</Filter>
     </ClCompile>
-    <ClCompile Include="ConnectingDB\exifGps.cpp">
-      <Filter>ソース ファイル\ConnectingDB</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -44,14 +41,8 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ConnectingDB\exifGps.h">
-      <Filter>ヘッダー ファイル\ConnectingDB</Filter>
-    </ClInclude>
     <ClInclude Include="ConnectingDB\ConnectingDB.h">
       <Filter>ヘッダー ファイル\ConnectingDB</Filter>
-    </ClInclude>
-    <ClInclude Include="Gps.h">
-      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Pattern.h">
       <Filter>ヘッダー ファイル</Filter>

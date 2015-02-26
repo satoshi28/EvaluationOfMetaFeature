@@ -7,10 +7,18 @@
 class PatternDetector
 {
 public:
+	/**
+	* @brief 物体を認識しマッチング結果を渡す
+	* @param[in] trainPatterns 認識する画像のパターン
+	*/
 	PatternDetector(std::vector<Pattern>& trainPatterns);
 	~PatternDetector();
 
-	/* 物体検出 */
+	/**
+	* @brief 物体を認識しマッチング結果を渡す
+	* @param[in] queryImage 入力画像
+	* @param[out] ranking マッチング結果
+	*/
 	void findPattern(cv::Mat queryImage, std::vector<int>& ranking );
 
 private:

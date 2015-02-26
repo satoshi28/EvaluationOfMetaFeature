@@ -7,6 +7,7 @@
 
 bool readImages(std::vector<std::string> filenames, std::vector<cv::Mat>& images);
 
+//コマンドライン引数にデータベースの名前を入力(*.accdb)
 int main(int argc, char* argv[])
 {
 	if(argc < 1)
@@ -14,7 +15,7 @@ int main(int argc, char* argv[])
 		std::cout << "please input argumet" << std::cout;
 		return 1;
 	}
-	//DBの名前を取得
+	//コマンドライン引数からDBの名前を取得
 	std::string fileName = argv[1];
 
 
@@ -43,7 +44,7 @@ int main(int argc, char* argv[])
 
 	//データベースから特徴量の読み込み
 	std::vector<Pattern> patterns;
-	db.loadDB(patterns, fileName);
+	db.loadDB(fileName, patterns);
 	
 	PatternDetector patternDetector(patterns);
 
